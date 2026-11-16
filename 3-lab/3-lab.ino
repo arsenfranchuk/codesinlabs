@@ -35,8 +35,8 @@ void syncReset()
 int isForbidden(int qState, int notQState)
 {
   bool state = (qState == LOW && notQState == LOW);
-  digitalWrite(LED_FORBIDDEN_PIN, state ? HIGH : LOW);
-  return state ? 1 : 0;
+  digitalWrite(LED_FORBIDDEN_PIN, state);
+  return state;
 }
 
 void printStatus(int qState, int notQState, int forbidden)
