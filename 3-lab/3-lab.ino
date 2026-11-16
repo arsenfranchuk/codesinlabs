@@ -7,6 +7,7 @@ const int LED_FORBIDDEN_PIN = 13;
 const int SERIAL_RATE = 9600;
 const int LOOP_DELAY = 25;
 
+
 void setupPins()
 {
   pinMode(PULL_RESET_PIN, INPUT);
