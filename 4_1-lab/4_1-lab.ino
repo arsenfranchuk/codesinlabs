@@ -7,27 +7,27 @@ const int STEP_DELAY = 200;
 class RunningLight
 {
 private:
-  int _dataPin;
-  int _clockPin;
-  int _latchPin;
-  int _stepDelay;
-  int _currentStep;
+  int dataPin;
+  int clockPin;
+  int latchPin;
+  int stepDelay;
+  int currentStep;
 
   void tickClock()
   {
-    digitalWrite(_clockPin, HIGH);
-    digitalWrite(_clockPin, LOW);
+    digitalWrite(clockPin, HIGH);
+    digitalWrite(clockPin, LOW);
   }
 
   void tickLatch()
   {
-    digitalWrite(_latchPin, HIGH);
-    digitalWrite(_latchPin, LOW);
+    digitalWrite(latchPin, HIGH);
+    digitalWrite(latchPin, LOW);
   }
 
   void pushBit(int bitValue)
   {
-    digitalWrite(_dataPin, bitValue);
+    digitalWrite(dataPin, bitValue);
     tickClock();
     tickLatch();
   }
@@ -35,16 +35,16 @@ private:
 public:
   RunningLight(int dataPin, int clockPin, int latchPin, int stepDelay)
   {
-    _dataPin = dataPin;
-    _clockPin = clockPin;
-    _latchPin = latchPin;
-    _stepDelay = stepDelay;
-    _currentStep = 0;
+    dataPin = dataPin;
+    clockPin = clockPin;
+    latchPin = latchPin;
+    stepDelay = stepDelay;
+    currentStep = 0;
   }
 
   void resetAll()
   {
-    digitalWrite(_dataPin, LOW);
+    digitalWrite(dataPin, LOW);
 
     for (int i = 0; i < 8; i++)
     {
@@ -56,25 +56,25 @@ public:
 
   void setupPins()
   {
-    pinMode(_dataPin, OUTPUT);
-    pinMode(_clockPin, OUTPUT);
-    pinMode(_latchPin, OUTPUT);
+    pinMode(dataPin, OUTPUT);
+    pinMode(clockPin, OUTPUT);
+    pinMode(latchPin, OUTPUT);
 
-    digitalWrite(_dataPin, LOW);
-    digitalWrite(_clockPin, LOW);
-    digitalWrite(_latchPin, LOW);
+    digitalWrite(dataPin, LOW);
+    digitalWrite(clockPin, LOW);
+    digitalWrite(latchPin, LOW);
 
     resetAll();
   }
 
   void stepLight()
   {
-    int bitToSend = (_currentStep == 0) ? HIGH : LOW;
+    int bitToSend = (currentStep == 0) ? HIGH : LOW;
 
     pushBit(bitToSend);
 
-    _currentStep = (_currentStep + 1) % 8;
-    delay(_stepDelay);
+    currentStep = (currentStep + 1) % 8;
+    delay(stepDelay);
   }
 };
 
